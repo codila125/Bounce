@@ -9,7 +9,7 @@ End = mixer.Sound("/Users/prabesh/Documents/Github/Bounce/app_media/End.wav")
 
 import random
 
-surface = pygame.display.set_mode((360, 720), pygame.RESIZABLE)     #setting the size of the game window and also making it resizable
+surface = pygame.display.set_mode((360, 720))     #setting the size of the game window and also making it resizable
 
 pygame.display.set_caption("Bounce")     #Setting the title of our game window
 Icon = pygame.image.load("/Users/prabesh/Documents/Github/Bounce/app_media/Icon.png")      #Loading image first before setting it
@@ -20,6 +20,7 @@ vel = 15
 rocketx = 180
 rockety = 670
 rockethealth = 100
+healthbar = 0
 rocket_img = pygame.image.load("/Users/prabesh/Documents/Github/Bounce/app_media/Rocket.png")
 rocket_img = pygame.transform.scale(rocket_img,(rocketsize,rocketsize))
 
@@ -64,8 +65,11 @@ while running:  #keep game running till running is true
         bullety = 720+1
         if (((rocketx<(bulletx+bulletsize))and ((rocketx+rocketsize)>(bulletx+bulletsize)))or (((rocketx+rocketsize)>bulletx)and((rocketx+rocketsize)<(bulletx+bulletsize)))or ((rocketx<(bulletx)) and ((rocketx+rocketsize)>(bulletx+bulletsize)))):
             rockethealth = rockethealth - 20
+            healthbar = healthbar + 144
             Strike.play()
 
+    pygame.draw.rect(surface, (255, 0, 0), [0, healthbar, 10, 720])
+    
     if bullety>720:
         Shot.play()
         bullety = 150
