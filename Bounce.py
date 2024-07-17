@@ -3,6 +3,9 @@ pygame.init()   #initializing pygame
 
 from pygame import mixer
 mixer.init()
+Strike = mixer.Sound("/Users/prabesh/Documents/Github/Bounce/app_media/Strike.wav")
+Shot = mixer.Sound("/Users/prabesh/Documents/Github/Bounce/app_media/Shot.wav")
+End = mixer.Sound("/Users/prabesh/Documents/Github/Bounce/app_media/End.wav")
 
 import random
 
@@ -51,22 +54,26 @@ while running:  #keep game running till running is true
             # increment in x co-ordinate 
             rocketx += vel 
 
-    bullety = bullety + 0.7
+    bullety = bullety + 1
     surface.fill((0,0,0))
 
     surface.blit(monster_img, (50,0))
     surface.blit(rocket_img, (rocketx,rockety))
     surface.blit(bullet_img, (bulletx, bullety)) 
     if rockety<(bullety+bulletsize):
-        bullety = 720+0.9
+        bullety = 720+1
         if (((rocketx<(bulletx+bulletsize))and ((rocketx+rocketsize)>(bulletx+bulletsize)))or (((rocketx+rocketsize)>bulletx)and((rocketx+rocketsize)<(bulletx+bulletsize)))or ((rocketx<(bulletx)) and ((rocketx+rocketsize)>(bulletx+bulletsize)))):
-            rockethealth = rockethealth - 50
+            rockethealth = rockethealth - 20
+            Strike.play()
 
     if bullety>720:
+        Shot.play()
         bullety = 150
         bulletx = random.randint(0, 360-bulletsize)
     
     if rockethealth<=0:
+        End.play()
+        pygame.time.wait(1000)
         running = False
 
     pygame.display.update()     #Update the GUI
