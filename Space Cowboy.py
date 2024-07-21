@@ -3,10 +3,10 @@ pygame.init()   #initializing pygame
 
 from pygame import mixer    #importing mixer which is used for audio works
 mixer.init()    #initializing mixer
-Strike = mixer.Sound("Space Cowboy/app_media/Strike.wav")   #loading required audio files
-Shot = mixer.Sound("Space Cowboy/app_media/Shot.wav")
-Loss = mixer.Sound("Space Cowboy/app_media/Loss.wav")
-Win = mixer.Sound("Space Cowboy/app_media/Win.wav")
+Strike = mixer.Sound("Space Cowboy/app_media/Strike.mp3")   #loading required audio files
+Shot = mixer.Sound("Space Cowboy/app_media/Shot.mp3")
+Loss = mixer.Sound("Space Cowboy/app_media/Loss.mp3")
+Win = mixer.Sound("Space Cowboy/app_media/Win.mp3")
 
 import random   #importing random for random no. generation
 
@@ -73,7 +73,7 @@ while running:  #keep game running till running is true
             rocketx += vel 
 
     lighty = lighty - 1     #speed of ransengan by rocket
-    lasery = lasery + 1        #speed of lazer by mafia
+    lasery = lasery + 1.5        #speed of lazer by mafia
 
     surface.blit(mafia_img, (50,0))     #putting ufo on top
     surface.blit(rocket_img, (rocketx,rockety))     #putting our rocket in the bottom
