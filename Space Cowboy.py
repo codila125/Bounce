@@ -1,12 +1,7 @@
 import pygame   #importing pygame library
 pygame.init()   #initializing pygame
 
-from pygame import mixer    #importing mixer which is used for audio works
-mixer.init()    #initializing mixer
-Strike = mixer.Sound("Space Cowboy/app_media/Strike.mp3")   #loading required audio files
-Shot = mixer.Sound("Space Cowboy/app_media/Shot.mp3")
-Loss = mixer.Sound("Space Cowboy/app_media/Loss.mp3")
-Win = mixer.Sound("Space Cowboy/app_media/Win.mp3")
+from sounds import Strike, Shot, Loss, Win
 
 import random   #importing random for random no. generation
 
@@ -36,7 +31,8 @@ mafia_img = pygame.transform.scale(mafia_img, (250,170))
 
 #dimensions of lazer
 lasersize = 40
-laserx = random.randint(0, 360-lasersize)       #randomly generating numbers from given range
+laserx1 = random.randint(0, 360-lasersize)       #randomly generating numbers from given range
+laserx2 = random.randint(0, 360-lasersize)
 lasery = 100
 laser_img = pygame.image.load("Space Cowboy/app_media/Laser.png")
 laser_img = pygame.transform.scale(laser_img, (lasersize,lasersize))
@@ -77,12 +73,19 @@ while running:  #keep game running till running is true
 
     surface.blit(mafia_img, (50,0))     #putting ufo on top
     surface.blit(rocket_img, (rocketx,rockety))     #putting our rocket in the bottom
-    surface.blit(laser_img, (laserx, lasery))       #putting lasers on surface
+    surface.blit(laser_img, (laserx1, lasery))       #putting lasers on surface
+    surface.blit(laser_img, (laserx2, lasery))       #putting lasers on surface
     surface.blit(light_img, (lightx, lighty))       #putting rasengan on surface
 
     if rockety<(lasery+lasersize):  #finding out if the laser hits rocket
         lasery = 720+1      #moving the laser image down the surface so that it can be resent from top
-        if (((rocketx<(laserx+lasersize))and ((rocketx+rocketsize)>(laserx+lasersize)))or (((rocketx+rocketsize)>laserx)and((rocketx+rocketsize)<(laserx+lasersize)))or ((rocketx<(laserx)) and ((rocketx+rocketsize)>(laserx+lasersize)))):
+        if (((rocketx<(laserx1+lasersize))and ((rocketx+rocketsize)>(laserx1+lasersize)))or (((rocketx+rocketsize)>laserx1)and((rocketx+rocketsize)<(laserx1+lasersize)))or ((rocketx<(laserx1)) and ((rocketx+rocketsize)>(laserx1+lasersize)))):
+            rockethealth = rockethealth - 50        #if the laser hits, health of rocket is decreased
+            healthbar = healthbar + 72      #healthbar shows is
+            Strike.play()   #well some sounds for proof
+    if rockety<(lasery+lasersize):  #finding out if the laser hits rocket
+        lasery = 720+1      #moving the laser image down the surface so that it can be resent from top
+        if (((rocketx<(laserx2+lasersize))and ((rocketx+rocketsize)>(laserx2+lasersize)))or (((rocketx+rocketsize)>laserx2)and((rocketx+rocketsize)<(laserx2+lasersize)))or ((rocketx<(laserx2)) and ((rocketx+rocketsize)>(laserx1+lasersize)))):
             rockethealth = rockethealth - 50        #if the laser hits, health of rocket is decreased
             healthbar = healthbar + 72      #healthbar shows is
             Strike.play()   #well some sounds for proof
@@ -92,7 +95,8 @@ while running:  #keep game running till running is true
     if lasery>720:      #if the laser is already out of our surface, recyclying it
         Shot.play()     #since couldnot play it when it shoots, played it when it reaches the bottom
         lasery = 100
-        laserx = random.randint(0, 360-lasersize)       
+        laserx1 = random.randint(0, 360-lasersize)
+        laserx2 = random.randint(0, 360-lasersize)        
     
     if lighty <= 100:       #if the rasengan has already hit the mafia, recycling it
         lighty = rockety        #starting again from rocket
