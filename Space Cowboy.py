@@ -32,7 +32,6 @@ mafia_img = pygame.transform.scale(mafia_img, (250,170))
 #dimensions of lazer
 lasersize = 40
 laserx1 = random.randint(0, 360-lasersize)       #randomly generating numbers from given range
-laserx2 = random.randint(0, 360-lasersize)
 lasery = 100
 laser_img = pygame.image.load("Space Cowboy/app_media/Laser.png")
 laser_img = pygame.transform.scale(laser_img, (lasersize,lasersize))
@@ -74,18 +73,11 @@ while running:  #keep game running till running is true
     surface.blit(mafia_img, (50,0))     #putting ufo on top
     surface.blit(rocket_img, (rocketx,rockety))     #putting our rocket in the bottom
     surface.blit(laser_img, (laserx1, lasery))       #putting lasers on surface
-    surface.blit(laser_img, (laserx2, lasery))       #putting lasers on surface
     surface.blit(light_img, (lightx, lighty))       #putting rasengan on surface
 
     if rockety<(lasery+lasersize):  #finding out if the laser hits rocket
         lasery = 720+1      #moving the laser image down the surface so that it can be resent from top
         if (((rocketx<(laserx1+lasersize))and ((rocketx+rocketsize)>(laserx1+lasersize)))or (((rocketx+rocketsize)>laserx1)and((rocketx+rocketsize)<(laserx1+lasersize)))or ((rocketx<(laserx1)) and ((rocketx+rocketsize)>(laserx1+lasersize)))):
-            rockethealth = rockethealth - 50        #if the laser hits, health of rocket is decreased
-            healthbar = healthbar + 72      #healthbar shows is
-            Strike.play()   #well some sounds for proof
-    if rockety<(lasery+lasersize):  #finding out if the laser hits rocket
-        lasery = 720+1      #moving the laser image down the surface so that it can be resent from top
-        if (((rocketx<(laserx2+lasersize))and ((rocketx+rocketsize)>(laserx2+lasersize)))or (((rocketx+rocketsize)>laserx2)and((rocketx+rocketsize)<(laserx2+lasersize)))or ((rocketx<(laserx2)) and ((rocketx+rocketsize)>(laserx1+lasersize)))):
             rockethealth = rockethealth - 50        #if the laser hits, health of rocket is decreased
             healthbar = healthbar + 72      #healthbar shows is
             Strike.play()   #well some sounds for proof
@@ -106,12 +98,12 @@ while running:  #keep game running till running is true
     
     pygame.draw.rect(surface, (255, 0, 0), [350, mafiabar, 360, 720])       #contantly refreshing mafiabar
     
-    if rockethealth <= 0:   #if we lose, game ends
+    if rockethealth <=10:   #if we lose, game ends
         Loss.play()     #playing losing music
         pygame.time.wait(1000)      #waiting for music to finish
         running = False
 
-    if mafiahealth<=0:      #game ends even when we win
+    if mafiahealth<=10:      #game ends even when we win
         Win.play()      #playing winner music
         pygame.time.wait(3000)      #waiting untill the winner music finishes
         running = False
