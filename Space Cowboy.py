@@ -3,20 +3,20 @@ pygame.init()   #initializing pygame
 
 from pygame import mixer    #importing mixer which is used for audio works
 mixer.init()    #initializing mixer
-Strike = mixer.Sound("Space Cowboy/app_media/Strike.mp3")   #loading required audio files
-Shot = mixer.Sound("Space Cowboy/app_media/Shot.mp3")
-Loss = mixer.Sound("Space Cowboy/app_media/Loss.mp3")
-Win = mixer.Sound("Space Cowboy/app_media/Win.mp3")
+Strike = mixer.Sound("Space-Cowboy/app_media/Strike.mp3")   #loading required audio files
+Shot = mixer.Sound("Space-Cowboy/app_media/Shot.mp3")
+Loss = mixer.Sound("Space-Cowboy/app_media/Loss.mp3")
+Win = mixer.Sound("Space-Cowboy/app_media/Win.mp3")
 
 import random   #importing random for random no. generation
 
 surface = pygame.display.set_mode((360, 720))     #setting the size of the game window
 
 pygame.display.set_caption("Space Cowboy")     #Setting the title of our game window
-Icon = pygame.image.load("Space Cowboy/app_media/Icon.png")      #Loading image first before setting it
+Icon = pygame.image.load("Space-Cowboy/app_media/Icon.png")      #Loading image first before setting it
 pygame.display.set_icon(Icon)   #Setting an icon of the game window
 
-bg_img = pygame.image.load("Space Cowboy/app_media/Background.jpeg")  #loading background image  
+bg_img = pygame.image.load("Space-Cowboy/app_media/Background.jpeg")  #loading background image  
 
 #dimensions required for rocket
 rocketsize = 60
@@ -25,27 +25,27 @@ rocketx = 180
 rockety = 670
 rockethealth = 500
 healthbar = 0
-rocket_img = pygame.image.load("Space Cowboy/app_media/rocket.png")
+rocket_img = pygame.image.load("Space-Cowboy/app_media/rocket.png")
 rocket_img = pygame.transform.scale(rocket_img,(rocketsize,rocketsize))
 
 #dimensions required for mafia
 mafiahealth = 2000
 mafiabar = 0
-mafia_img = pygame.image.load("Space Cowboy/app_media/Space Mafia.png")
+mafia_img = pygame.image.load("Space-Cowboy/app_media/Space Mafia.png")
 mafia_img = pygame.transform.scale(mafia_img, (250,170))
 
 #dimensions of lazer
 lasersize = 40
 laserx = random.randint(0, 360-lasersize)       #randomly generating numbers from given range
 lasery = 100
-laser_img = pygame.image.load("Space Cowboy/app_media/Laser.png")
+laser_img = pygame.image.load("Space-Cowboy/app_media/Laser.png")
 laser_img = pygame.transform.scale(laser_img, (lasersize,lasersize))
 
 #dimension of rasengan
 lightsize = 30
 lightx = rocketx
 lighty = rockety
-light_img = pygame.image.load("Space Cowboy/app_media/Rasengan.png")
+light_img = pygame.image.load("Space-Cowboy/app_media/Rasengan.png")
 light_img = pygame.transform.scale(light_img, (lightsize,lightsize))
 
 running = True
